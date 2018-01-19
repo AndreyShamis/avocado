@@ -26,7 +26,11 @@ try:
     import lzma
     LZMA_CAPABLE = True
 except ImportError:
-    LZMA_CAPABLE = False
+    try:
+        from backports import lzma
+        LZMA_CAPABLE = True
+    except ImportError:
+        LZMA_CAPABLE = False
 
 from HTMLParser import HTMLParser
 
@@ -220,6 +224,25 @@ class DebianImageProvider(ImageProviderBase):
         self.url_versions = 'https://cdimage.debian.org/cdimage/openstack/'
         self.url_images = self.url_versions + '{version}/'
         self.image_pattern = 'debian-{version}-openstack-{arch}.qcow2$'
+
+
+class JeosImageProvider(ImageProviderBase):
+    """
+    JeOS Image Provider
+    """
+
+    name = 'JeOS'
+
+    def __init__(self, version='[0-9]+', build=None,
+                 arch=os.uname()[4]):
+        # JeOS uses '64' instead of 'x86_64'
+        if arch == 'x86_64':
+            arch = '64'
+
+        super(JeosImageProvider, self).__init__(version, build, arch)
+        self.url_versions = 'http://avocado-project.org/data/assets/jeos/'
+        self.url_images = self.url_versions + '{version}/'
+        self.image_pattern = 'jeos-{version}-{arch}.qcow2.xz$'
 
 
 class Image(object):
