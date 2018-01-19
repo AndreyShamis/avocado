@@ -26,7 +26,7 @@ class SleepTenMin(Test):
         Sleep for length seconds.
         """
         cycles = int(self.params.get('sleep_cycles', default=1))
-        length = int(self.params.get('sleep_length', default=600))
+        length = int(self.params.get('sleep_length', default=10))
         method = self.params.get('sleep_method', default='builtin')
 
         for _ in range(0, cycles):
