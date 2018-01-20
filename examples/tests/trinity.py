@@ -25,10 +25,11 @@ class TrinityTest(Test):
     """
 
     def setUp(self):
-        pass
+
         """
         Build trinity.
         """
+        return
         tarball = self.params.get('tarball', default='trinity-1.5.tar.bz2')
         tarball_path = self.get_data(tarball)
         if tarball_path is None:
@@ -36,16 +37,20 @@ class TrinityTest(Test):
         archive.extract(tarball_path, self.srcdir)
         srcdir = os.path.join(self.srcdir, 'trinity-1.5')
         os.chdir(srcdir)
+
+        return
         process.run('./configure.sh')
         build.make(srcdir)
         self.victims_path = data_factory.make_dir_and_populate(self.workdir)
 
     def test(self):
-        pass
+
         """
         Execute the trinity syscall fuzzer with the appropriate params.
         """
+        return
         cmd = './trinity -m -I'
+        
         process.run(cmd)
         cmd = './trinity -m'
         if self.params.get('stress'):
