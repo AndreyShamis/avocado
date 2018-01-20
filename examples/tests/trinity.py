@@ -25,6 +25,7 @@ class TrinityTest(Test):
     """
 
     def setUp(self):
+        pass
         """
         Build trinity.
         """
@@ -40,6 +41,7 @@ class TrinityTest(Test):
         self.victims_path = data_factory.make_dir_and_populate(self.workdir)
 
     def test(self):
+        pass
         """
         Execute the trinity syscall fuzzer with the appropriate params.
         """
